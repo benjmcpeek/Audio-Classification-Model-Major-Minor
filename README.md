@@ -14,11 +14,8 @@ Image provided by [Pramitha P Kamath](https://www.quora.com/profile/Pramitha-P-K
 ---
 
 
-<<<<<<< HEAD
-=======
 - **Frequency:** Is the amount of waves over a period of time. The more waves in a given period of time, the higher the frequency (pitch). The image below shows the difference between higher and lower frequencies. 
 
->>>>>>> 96b2260ae76a90770bc5b74fcad221a931f501dc
 ![Frequency](https://cdn.britannica.com/83/194283-004-37696A2F.jpg)
 
 Image provided by [Britannica](https://kids.britannica.com/students/assembly/view/223513)
