@@ -1,5 +1,13 @@
 # Capstone_Project
 
+**TO DO**
+
+- CNN model is horribly overfit. Find ways to mitigate this problem.
+- Possible Solutions: More data (balance classes), load same wave files but with not shift, mask more of the image, checking hyperparameters 
+
+
+
+
 
 **Background** 
 
