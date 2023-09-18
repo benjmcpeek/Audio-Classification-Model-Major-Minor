@@ -158,6 +158,7 @@ We will start by creating a baseline convolutional neural network with two hidde
 - Scaled-Normalized Mel-Spectrograms: Scaled the signal time-series array of each spectrogram using the z-score method of StandardScaler
 
 Metric = Accuracy 
+
 Loss = Binary-Cross Entropy
 
 #### CNN Models:
