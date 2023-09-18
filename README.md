@@ -53,10 +53,10 @@ Image provided by [GaussianWaves](https://www.gaussianwaves.com/2022/03/spectrog
 
 - **Inversions**: Fundamentally a chord is constructed out of the first, third, fifth, and seventh note of a seven note scale. Inversions are different ways to order a chord. Here are the most basic examples of chord inversions.
 
-Root Position = 1, 3, 5, 7
-1rst Inversion = 3, 5, 7, 1
-2nd Inversion = 5, 7, 1, 3
-3rd Inversion = 7, 1, 3, 5
+- Root Position = 1, 3, 5, 7
+- 1rst Inversion = 3, 5, 7, 1
+- 2nd Inversion = 5, 7, 1, 3
+- 3rd Inversion = 7, 1, 3, 5
 
 ---
 
@@ -64,9 +64,9 @@ Root Position = 1, 3, 5, 7
 
 An example would be a F Minor 9th chord.
 
-Notes of Scale: 1_F, 2_G, 3_Ab, 4_Bb, 5_C, 6_D, 7_Eb
-Notes of Chord: F, Ab, C, Eb, G
-Numeric Quality of Notes: 1, 3, 5, 7, 9
+- Notes of Scale: 1_F, 2_G, 3_Ab, 4_Bb, 5_C, 6_D, 7_Eb
+- Notes of Chord: F, Ab, C, Eb, G
+- Numeric Quality of Notes: 1, 3, 5, 7, 9
 
 ---
 
@@ -106,6 +106,24 @@ Null-Baseline = 58.4%
 | `chord_qual`   | [object] | [the file path name of the audio file] |
 | `target`   | [int64] | [a boolean of 0 or 1 determining the target class {'major': 0, 'minor': 1}] |
 
+
+
+## EDA
+
+We will create a dataframe composed of the file path names of each audio file and its corresponding target class {'major': 0, 'minor': 1}. This dataframe will be used in a for loop to preprocess the audio data into spectrograms. We will also explore the characteristics of raw audio files, spectrograms, and image files, to understand the fundamental differences between feeding spectrograms or images into a convolutional neural network. 
+
+**Exploring Random Samples of Audio Data**
+This (Bb Major 6th: Bb-D-F-G) chord will be difficult for our models to interpret. This is because all of the notes that go into a Major 6th chord are the same notes that go into it's relative Minor 7th chord (G Minor 7th: G-Bb-D-F). The ability to determine the difference between a Major 6th and it's relative Minor 7th chord is either a different instrument establishing the root or the context of the chords before and after it. Because we don't have these features to use in our models it seems that our models will be thrown off by this data. We can also notice inversions used in some of these audio files. This means that a G Minor 7th chord could validly have the notes ordered as (Bb-D-F-G) just as our Bb Major 6th chord is labeled.
+For future consideration new data should be created or found with simpler chord structures and chord qualities that do not match even in inversions.
+
+This F Diminished Triad (Note Order: F-Ab-B-F) does not match either chord quality classes. This is a diminished chord and distinctly different from the quality it was labeled as (minor). This is a mislabeled class and will impact the quality of our model.
+Future consideration will be to locate other data that is properly labeled or create an original dataset with simpler chord qualities.
+
+
+#### Differences
+
+For images, the weights on the x and y axis are the same. Every point on an image represents a pixel intensity. For spectrograms, the x and y axis are fundamentally different. The x-axis represents time and the y_axis represents amplitude and frequency. This means that models will respond differently if a spectrogram is rotated. If the x-axis is now vertical, the model won't be able to adjust the axis observation.
+Neighboring pixels in an image can strongly be assumed to be a part of the same object. However in spectrograms frequencies aren't separated by different objects but clumped together in a time-series. This means that a CNN model will have a harder time identifying separate sounds.
 
 
 ## Feature Extraction and Preprocessing 
@@ -158,22 +176,26 @@ Loss = Binary-Cross Entropy
 
 ## Performance 
 
-Accuracy:
-**base-model**: 60.89%
-**scaled_base_model**: 58.77%
-**added_layers_model**: 60.16%
-**VGG16_model**:
+| Model Name | Accuracy | Loss |
+| ---------- | -------- | ---- |
+| `base-model` | 60.89% | 2.1 |
+| `scaled_base_model` | 58.77% | 0.75 |
+| `added_layers_model` | 60.16% | 0.67 |
+| `VGG16_model` | 58.44% | 0.68 |
 
-Loss:
-**base-model**: 2.1
-**scaled_base_model**: 0.75
-**added_layers_model**: 0.67 
-**VGG16_model**:
 
 ## Conclusion 
 
+We tested scaled and unscaled spectrograms by running the same CNN structured model through both. Scaling our data using the z-score method stagnated the accuracy and loss results. For future consideration this project will aim to compare the performance of scaled and unscaled spectrogram data by running multiple iterations of CNN models through both to be able to compare a large series of results. Discovering the optimal way to format spectrogram data for a CNN model is still uncertain and this project aims to find a clear answer.
+
+Although our added_layers_model performed the best and improved from our null_baseline, none of our models show significant clear results. There could be a number of reasons for this but two potential problems this project aims to tackle are the mislabeled class data discovered and the vague classes. After multiple random samplings of the audio files to confirm its class, I discovered some misclassified chords and unwanted chord qualities. Mislabeled data is the most obvious reason why our model could be performing poorly. For future consideration this project aims to generate our own audio data with completely correct class labels. We also aim to simplify the audio context by only recording triad chords with their respective inversions. Triad chords are much more distinguishable from one another than 7th chords. The majority of the samples listened to of the data used in this project were 7th chords causing potential overlap of chord qualities.
 
 
+**Recommendations:**
+
+- For audio classification models it is suggested to initially work with a smaller dataset. With a smaller dataset you can ensure each file is correctly labeled and have a better understanding of the different variations within each class. When audio files are turned into spectrograms they can be augmented with shifting and transposing to continually duplicate your input data. This helps compensate for the initial smaller dataset.
+
+- Before scaling or normalizing your mel-spectrograms, run your CNN model using the original graphs. Our model comparison has shown that scaled spectrograms stagnate any increase in accuracy or decrease in overall loss. Future series of model comparisons will help solidify this recommendation. 
 
 
 
