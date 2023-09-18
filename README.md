@@ -28,6 +28,8 @@ In this project we will test different augmented spectrograms on CNN models and 
 
 **audio_files.csv**: dataframe created from the 01_eda_audio that contains every audio file path name and is target variable 
 
+**presentation.pdf**: a slide-show summarizing the project
+
 
 ---
 
@@ -152,16 +154,18 @@ We will be converting the audio wave files into augmented spectrograms and alloc
 
 Different Spectrograms used:
 
-Mel-Spectrograms
-Spectrograms
-Mel-Spectrograms with ticks and a colorbar
-Normalized spectrograms using StandardScalar
+- Mel-Spectrograms
+- Spectrograms
+- Mel-Spectrograms with ticks and a colorbar
+- Normalized spectrograms using StandardScalar
+
+
 Feature augmentation to create more data:
 
-time_shift: shifts the audio to a random starting point within the set signal length of 50,000
-transpose: takes the audio signal and doubles it to be exactly on higher than its original
-aug_spectrogram: masks a bar of the y and x axis and random widths by setting those axis areas to 0. This is intended to prevent overfitting but did not perform well in my models.
-By creating a set of original spectrograms, a set with only time_shift, a set with only transpose, and a set with both transpose and time_shift, enabled me to quadruple my data.
+- time_shift: shifts the audio to a random starting point within the set signal length of 50,000
+- transpose: takes the audio signal and doubles it to be exactly on higher than its original
+- aug_spectrogram: masks a bar of the y and x axis and random widths by setting those axis areas to 0. This is intended to prevent overfitting but did not perform well in my models.
+  By creating a set of original spectrograms, a set with only time_shift, a set with only transpose, and a set with both transpose and time_shift, enabled me to quadruple my data.
 
 Total Unique Spectrograms: 3,444
 
