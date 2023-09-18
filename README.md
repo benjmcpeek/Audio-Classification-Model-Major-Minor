@@ -106,11 +106,16 @@ We will create a dataframe composed of the file path names of each audio file an
 
 **Audio File Details:**
 
-Audio Files (Major): 502, 
+Audio Files (Major): 502 
+
 Audio Files (Minor): 357
+
 Total Audio Files: 859
+
 Percent of Major: 0.5844004656577415
+
 Percent of Minor: 0.41559953434225844
+
 Null-Baseline = 58.4%
 
 
