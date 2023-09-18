@@ -16,6 +16,21 @@ In this project we will test different augmented spectrograms on CNN models and 
 
 ---
 
+## Folder-Path Description 
+
+**audio_files**: contains all of the .wav raw audio files from the major and minor kaggle dataset
+
+**data**: contains all of the spectrogram images saved from the 02_preprocessing notebook
+
+**images**: used to store every image saved to use for the presentation
+
+**code**: has the 01_eda_audio, 02_preprocessing, 03_final_models notebooks which is all of the code needed for this project
+
+**audio_files.csv**: dataframe created from the 01_eda_audio that contains every audio file path name and is target variable 
+
+
+---
+
 ## Introduction 
 
 In music there are four main categories of chord qualities: Major, Minor, Diminished, and Augmented. Each of these chords have a specific notation shape that determines its class, however the order of the notation can vary incredibly. For this reason in this project we will be exclusively focusing on Major and Minor chords. The dataset used for this project contains a large variety of notation orders for both of these chord qualities. The terminology below are important concepts to understand before engaging in this project.
